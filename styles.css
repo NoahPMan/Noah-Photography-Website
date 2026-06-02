@@ -180,14 +180,12 @@ header {
     gap: 22px;
 }
 
-/* Horizontal photos: compact 3 across */
 .portfolio-wide-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 14px;
 }
 
-/* Vertical photos: compact 6 across */
 .portfolio-tall-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -220,9 +218,21 @@ header {
         filter 0.3s ease;
 }
 
+.portfolio-item:hover img {
+    transform: scale(1.025);
+    filter: brightness(1) contrast(1.06);
+}
 
+/* Crop fixes for mobile + general positioning */
+.portfolio-item img[src*="IMG_0728"] {
+    object-position: center 58%;
+}
 
-/* TABLET */
+.portfolio-item img[src*="DSC02987"] {
+    object-position: center 38%;
+}
+
+/* PORTFOLIO TABLET */
 @media (max-width: 950px) {
     .portfolio-wide-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -230,24 +240,6 @@ header {
 
     .portfolio-tall-grid {
         grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* MOBILE */
-@media (max-width: 700px) {
-
-    .portfolio-wide-grid,
-    .portfolio-tall-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .portfolio-item.wide {
-        aspect-ratio: 16 / 10;
-    }
-
-    .portfolio-item.tall {
-        aspect-ratio: 4 / 5;
     }
 }
 
@@ -374,7 +366,6 @@ header {
     margin-top: 42px;
 }
 
-/* Default: 3 cards across */
 .card {
     grid-column: span 2;
     background: #1a1a1f;
@@ -389,7 +380,6 @@ header {
         background 0.25s ease;
 }
 
-/* Make the last 2 cards split the bottom row evenly */
 .card:nth-child(4),
 .card:nth-child(5) {
     grid-column: span 3;
@@ -422,7 +412,7 @@ header {
     line-height: 1.65;
 }
 
-/* TABLET */
+/* SERVICES TABLET */
 @media (max-width: 950px) {
     .services {
         grid-template-columns: repeat(2, 1fr);
@@ -439,7 +429,7 @@ header {
     }
 }
 
-/* MOBILE */
+/* SERVICES MOBILE */
 @media (max-width: 650px) {
     .services {
         grid-template-columns: 1fr;
@@ -460,6 +450,14 @@ header {
 
 #booking h2 {
     margin-bottom: 28px;
+}
+
+.booking-intro {
+    max-width: 560px;
+    margin: -18px auto 30px;
+    color: #aaa;
+    font-size: 15px;
+    line-height: 1.7;
 }
 
 form {
@@ -530,26 +528,23 @@ footer {
     font-size: 13px;
 }
 
-/* TABLET */
-@media (max-width: 950px) {
-    .portfolio-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .portfolio-item:nth-child(1),
-    .portfolio-item:nth-child(5) {
-        grid-column: span 1;
-    }
-
-    .services {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 /* MOBILE */
 @media (max-width: 700px) {
+    .nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px 0;
+    }
+
     .nav ul {
-        display: none;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav a {
+        font-size: 12px;
     }
 
     .hero {
@@ -558,7 +553,7 @@ footer {
 
     .hero h1 {
         font-size: 38px;
-        letter-spacing: -0.9px;
+        letter-spacing: -1px;
     }
 
     .hero-description {
@@ -573,21 +568,18 @@ footer {
         margin-bottom: 30px;
     }
 
-    .portfolio-grid {
+    .portfolio-wide-grid,
+    .portfolio-tall-grid {
         grid-template-columns: 1fr;
         gap: 12px;
     }
 
-    .portfolio-item.landscape,
-    .portfolio-item.portrait,
-    .portfolio-item:nth-child(1),
-    .portfolio-item:nth-child(5) {
-        aspect-ratio: 4 / 5;
-        grid-column: span 1;
+    .portfolio-item.wide {
+        aspect-ratio: 16 / 11;
     }
 
-    .services {
-        grid-template-columns: 1fr;
+    .portfolio-item.tall {
+        aspect-ratio: 4 / 5;
     }
 
     .buttons {
