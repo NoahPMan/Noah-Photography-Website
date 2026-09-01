@@ -1299,3 +1299,91 @@ p {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* =============== PORTRAIT MOBILE FIX =============== */
+
+@media screen and (max-width: 700px) and (orientation: portrait) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  .portfolio-index .index-list {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .portfolio-index .index-row {
+    display: block !important;
+    width: 100% !important;
+    padding: 28px 0 !important;
+    overflow: hidden !important;
+  }
+
+  .portfolio-index .index-thumb {
+    display: block !important;
+    float: none !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10;
+    margin: 0 0 18px !important;
+  }
+
+  .portfolio-index .index-thumb img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+  }
+
+  .portfolio-index .index-info {
+    display: block !important;
+    float: none !important;
+    position: static !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .portfolio-index .index-info h3 {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 0 0 8px !important;
+    font-size: 2rem !important;
+    line-height: 1.1 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .portfolio-index .index-info p {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    font-size: 1rem !important;
+    line-height: 1.55 !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .portfolio-index .index-count {
+    display: block !important;
+    float: none !important;
+    position: static !important;
+    width: 100% !important;
+    margin: 14px 0 0 !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+@media screen and (max-width: 480px) and (orientation: portrait) {
+  .portfolio-index .index-thumb {
+    aspect-ratio: 4 / 3;
+  }
+
+  .portfolio-index .index-info h3 {
+    font-size: 1.8rem !important;
+  }
+}
