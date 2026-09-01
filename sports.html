@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sports and athlete photography by Noah Manaigre, Winnipeg — game action, individual athlete sessions, and team coverage." />
+    <meta property="og:title" content="Sports Photography — Noah Manaigre" />
+    <meta property="og:description" content="Sports and athlete photography by Noah Manaigre, Winnipeg — game action, individual athlete sessions, and team coverage." />
+    <meta property="og:image" content="photos/IMG_2440.JPEG" />
+    <meta property="og:type" content="website" />
+    <title>Sports Photography — Noah Manaigre</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="logo">Noah Manaigre</a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">Menu</span>
+        </button>
+
+        <ul id="navMenu" class="nav-menu">
+          <li><a href="sports.html" aria-current="page">Sports</a></li>
+          <li><a href="portraits.html">Portraits</a></li>
+          <li><a href="street.html">Street</a></li>
+          <li><a href="nature.html">Nature</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#booking" class="nav-cta">Book a Session</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="category-hero">
+        <p class="breadcrumb"><a href="index.html">Home</a> / Sports</p>
+
+        <div class="category-hero-content">
+          <div>
+            <h1>Sports</h1>
+            <p class="lede">Game action and individual athlete sessions, shot to capture movement without losing detail.</p>
+          </div>
+          <p class="category-count">3 photos</p>
+        </div>
+      </section>
+
+      <section class="gallery-section">
+        <div class="portfolio-grid">
+          <button class="portfolio-item wide" data-caption="Sports detail photography">
+            <img src="photos/IMG_2440.JPEG" alt="Sports detail photography" loading="lazy" />
+            <span class="frame-caption">Sports detail photography</span>
+          </button>
+
+          <button class="portfolio-item" data-caption="Sports action photography">
+            <img src="photos/IMG_3207.jpg" alt="Sports action photography" loading="lazy" />
+            <span class="frame-caption">Sports action photography</span>
+          </button>
+
+          <button class="portfolio-item" data-caption="Hockey sports photography">
+            <img src="photos/IMG_7283.jpg" alt="Hockey sports photography" loading="lazy" />
+            <span class="frame-caption">Hockey sports photography</span>
+          </button>
+        </div>
+
+        <div class="gallery-crosslinks">
+          <a href="portraits.html">Portraits</a>
+          <a href="street.html">Street</a>
+          <a href="nature.html">Nature</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <p class="footer-name">Noah Manaigre</p>
+          <p>Photographer &middot; Winnipeg, Manitoba</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="index.html#booking">Book</a></li>
+          <li><a href="#main" class="back-to-top">Back to top</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
+      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+      <img src="" alt="" id="lightboxImg" />
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+      <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

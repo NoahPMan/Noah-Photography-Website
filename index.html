@@ -5,118 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Photography portfolio and booking site for Noah Manaigre, specializing in street, sports, portraits, couples, families, and athlete sessions."
+      content="Noah Manaigre is a photographer based in Winnipeg, Manitoba, specializing in sports, portrait, street, and nature photography."
     />
-    <title>Noah Manaigre Photography</title>
+    <meta property="og:title" content="Noah Manaigre Photography" />
+    <meta
+      property="og:description"
+      content="Sports, portrait, street, and nature photography in Winnipeg, Manitoba."
+    />
+    <meta property="og:image" content="photos/IMG_2601-modded.JPEG" />
+    <meta property="og:type" content="website" />
+    <title>Noah Manaigre — Photographer, Winnipeg</title>
 
-    <link rel="stylesheet" href="styles.css" />
-
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
-    <header>
-      <nav class="nav">
-        <a href="#" class="logo">Noah Manaigre</a>
+    <a class="skip-link" href="#main">Skip to content</a>
 
-        <ul>
-          <li><a href="#portfolio">Portfolio</a></li>
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a href="index.html" class="logo">Noah Manaigre</a>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-expanded="false"
+          aria-controls="navMenu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span class="sr-only">Menu</span>
+        </button>
+
+        <ul id="navMenu" class="nav-menu">
+          <li><a href="sports.html">Sports</a></li>
+          <li><a href="portraits.html">Portraits</a></li>
+          <li><a href="street.html">Street</a></li>
+          <li><a href="nature.html">Nature</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#booking">Book</a></li>
+          <li><a href="#booking" class="nav-cta">Book a Session</a></li>
         </ul>
       </nav>
     </header>
 
-    <main>
+    <main id="main">
       <!-- HERO -->
       <section class="hero">
-        <div class="hero-content">
-          <p class="hero-tag">Street • Sports • Portraits</p>
+        <div class="hero-grid">
+          <div class="hero-text">
+            <p class="hero-kicker">Photographer &mdash; Winnipeg, Manitoba</p>
+            <h1>Noah Manaigre</h1>
+            <p class="hero-lede">
+              I photograph sports, portraits, street life, and the natural
+              world, based in Winnipeg. My approach is clean and
+              considered &mdash; letting the subject and the moment lead.
+            </p>
 
-          <h1>Real moments. Clean frames.</h1>
+            <div class="buttons">
+              <a href="#portfolio" class="btn">View Portfolio</a>
+              <a href="#booking" class="btn outline">Book a Session</a>
+            </div>
+          </div>
 
-          <p class="hero-description">
-            Portraits, sports, and real moments — shot clean, simple, and
-            intentional.
-          </p>
-
-          <div class="buttons">
-            <a href="#portfolio" class="btn">View My Work</a>
-            <a href="#booking" class="btn outline">Book a Shoot</a>
+          <div class="hero-image">
+            <img
+              src="photos/IMG_2601-modded.JPEG"
+              alt="Noah Manaigre with a camera"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
 
-      <!-- PORTFOLIO -->
-      <section id="portfolio" class="section portfolio-section">
-        <p class="eyebrow">Selected Work</p>
-        <h2>Portfolio</h2>
-
-        <div class="portfolio-group">
-          <div class="portfolio-wide-grid">
-            <div class="portfolio-item wide">
-              <img src="photos/IMG_0728.JPEG" alt="Street photography" />
-            </div>
-
-            <div class="portfolio-item wide">
-              <img src="photos\IMG_0432 copy.JPEG" alt="Street photography" />
-            </div>
-
-            <div class="portfolio-item wide">
-              <img src="photos/IMG_0616.JPEG" alt="Urban street photography" />
-            </div>
-
-            <div class="portfolio-item wide">
-              <img
-                src="photos/DSC03633.JPEG"
-                alt="Outdoor portrait photography"
-              />
-            </div>
-
-            <div class="portfolio-item wide">
-              <img src="photos\DSC02987.JPEG" alt="Iguana photography" />
-            </div>
-
-            <div class="portfolio-item wide">
-              <img
-                src="photos\DSC02106.JPEG"
-                alt="Creative detail photography"
-              />
-            </div>
+      <!-- PORTFOLIO INDEX -->
+      <section id="portfolio" class="section portfolio-index">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Portfolio</p>
+            <h2>Browse by category</h2>
           </div>
+        </div>
 
-          <div class="portfolio-tall-grid">
-            <div class="portfolio-item tall">
-              <img
-                src="photos/IMG_0613.JPEG"
-                alt="Street portrait photography"
-              />
-            </div>
+        <div class="index-list">
+          <a href="sports.html" class="index-row">
+            <span class="index-thumb">
+              <img src="photos/IMG_7283.jpg" alt="" loading="lazy" />
+            </span>
+            <span class="index-info">
+              <h3>Sports</h3>
+              <p>Game action and individual athlete sessions.</p>
+            </span>
+            <span class="index-count">3 photos</span>
+          </a>
 
-            <div class="portfolio-item tall">
-              <img src="photos/IMG_2440.JPEG" alt="Sports detail photography" />
-            </div>
+          <a href="portraits.html" class="index-row">
+            <span class="index-thumb">
+              <img src="photos/DSC03633.JPEG" alt="" loading="lazy" />
+            </span>
+            <span class="index-info">
+              <h3>Portraits</h3>
+              <p>Individual and lifestyle portrait sessions.</p>
+            </span>
+            <span class="index-count">3 photos</span>
+          </a>
 
-            <div class="portfolio-item tall">
-              <img src="photos/IMG_3207.jpg" alt="Sports action photography" />
-            </div>
+          <a href="street.html" class="index-row">
+            <span class="index-thumb">
+              <img src="photos/IMG_0728.JPEG" alt="" loading="lazy" />
+            </span>
+            <span class="index-info">
+              <h3>Street</h3>
+              <p>Candid, unposed moments from the city.</p>
+            </span>
+            <span class="index-count">4 photos</span>
+          </a>
 
-            <div class="portfolio-item tall">
-              <img src="photos/IMG_7283.jpg" alt="Hockey sports photography" />
-            </div>
-
-            <div class="portfolio-item tall">
-              <img src="photos/IMG_7468.JPG" alt="Lifestyle portrait session" />
-            </div>
-
-            <div class="portfolio-item tall">
-              <img src="photos\DSC03125.JPEG" alt="Dog portrait photography" />
-            </div>
-          </div>
+          <a href="nature.html" class="index-row">
+            <span class="index-thumb">
+              <img src="photos/DSC03125.JPEG" alt="" loading="lazy" />
+            </span>
+            <span class="index-info">
+              <h3>Nature &amp; Animals</h3>
+              <p>Wildlife and the outdoors.</p>
+            </span>
+            <span class="index-count">2 photos</span>
+          </a>
         </div>
       </section>
 
@@ -125,122 +146,176 @@
         <div class="about-grid">
           <div class="about-image">
             <img
-              src="photos\IMG_2601-modded.JPEG"
+              src="photos/IMG_0953.JPG"
               alt="Noah Manaigre holding a camera"
+              loading="lazy"
             />
           </div>
 
           <div class="about-content">
-            <p class="eyebrow">About Me</p>
-            <h2>Behind the Camera</h2>
+            <p class="section-kicker">About</p>
+            <h2>Noah Manaigre</h2>
 
             <p>
-              I’m Noah Manaigre, a Winnipeg-based photographer focused on
-              street, sports, and portrait photography. I’m drawn to real
-              moments, movement, and clean compositions that feel natural and
-              intentional.
+              I'm a photographer based in Winnipeg, Manitoba, specializing
+              in sports, portrait, street, and nature photography. I'm
+              drawn to real moments and clean compositions that feel
+              natural rather than staged.
             </p>
 
             <p>
-              Whether I’m shooting athletes, portraits, or everyday moments, my
-              goal is to create sharp, modern images that feel true to the
-              moment.
+              Whatever I'm shooting, my goal is the same: sharp, well-composed
+              images that hold up on their own and feel true to the moment
+              they were taken.
             </p>
+
+            <dl class="about-facts">
+              <div>
+                <dt>Location</dt>
+                <dd>Winnipeg, Manitoba</dd>
+              </div>
+              <div>
+                <dt>Specialties</dt>
+                <dd>Sports, Portraits, Street, Nature</dd>
+              </div>
+            </dl>
 
             <a href="#booking" class="about-link">Book a Session</a>
           </div>
         </div>
       </section>
 
-      <section id="services" class="section dark">
-        <p class="eyebrow">What I Shoot</p>
-        <h2>Services</h2>
-
-        <div class="services">
-          <div class="card">
-            <h3>Portrait Session</h3>
-            <p class="price">$200</p>
-            <p>1 hour session • 10–15 edited photos • online gallery</p>
+      <!-- SERVICES -->
+      <section id="services" class="section services-section">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Services</p>
+            <h2>Sessions &amp; Pricing</h2>
           </div>
-
-          <div class="card">
-            <h3>Individual Athlete Session</h3>
-            <p class="price">$225</p>
-            <p>1 hour session • 10–15 edited photos • action + posed shots</p>
-          </div>
-
-          <div class="card">
-            <h3>Couples Shoot</h3>
-            <p class="price">$250</p>
-            <p>1 hour session • 15–20 edited photos • online gallery</p>
-          </div>
-
-          <div class="card">
-            <h3>Family Session</h3>
-            <p class="price">$300</p>
-            <p>Up to 1.5 hours • 20+ edited photos • online gallery</p>
-          </div>
-
-          <div class="card">
-            <h3>Sports Coverage</h3>
-            <p class="price">Starting at $400</p>
-            <p>
-              Game coverage, team photos, and individual athlete shoots • full
-              edited gallery
-            </p>
-          </div>
+          <p class="section-note">Every package includes an online gallery.</p>
         </div>
+
+        <ul class="price-list">
+          <li class="price-row">
+            <div class="price-info">
+              <h3>Portrait Session</h3>
+              <p>1 hour &middot; 10&ndash;15 edited photos</p>
+            </div>
+            <p class="price">$200</p>
+          </li>
+
+          <li class="price-row">
+            <div class="price-info">
+              <h3>Individual Athlete Session</h3>
+              <p>1 hour &middot; 10&ndash;15 edited photos &middot; action + posed</p>
+            </div>
+            <p class="price">$225</p>
+          </li>
+
+          <li class="price-row">
+            <div class="price-info">
+              <h3>Couples Shoot</h3>
+              <p>1 hour &middot; 15&ndash;20 edited photos</p>
+            </div>
+            <p class="price">$250</p>
+          </li>
+
+          <li class="price-row">
+            <div class="price-info">
+              <h3>Family Session</h3>
+              <p>Up to 1.5 hours &middot; 20+ edited photos</p>
+            </div>
+            <p class="price">$300</p>
+          </li>
+
+          <li class="price-row">
+            <div class="price-info">
+              <h3>Sports Coverage</h3>
+              <p>Game coverage, team photos &amp; individual athlete shoots</p>
+            </div>
+            <p class="price">From $400</p>
+          </li>
+        </ul>
       </section>
 
+      <!-- BOOKING -->
       <section id="booking" class="section booking-section">
-        <p class="eyebrow">Booking</p>
-        <h2>Book a Session</h2>
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Booking</p>
+            <h2>Book a Session</h2>
+          </div>
+          <p class="section-note">
+            Send an inquiry and I'll reply with availability, pricing, and
+            next steps.
+          </p>
+        </div>
 
-        <p class="booking-intro">
-          Send an inquiry and I’ll get back to you with availability, pricing,
-          and next steps.
-        </p>
+        <form
+          class="booking-form"
+          action="https://formspree.io/f/xzdwjyad"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="New Photography Inquiry" />
 
-        <form action="https://formspree.io/f/xzdwjyad" method="POST">
-          <input
-            type="hidden"
-            name="_subject"
-            value="New Photography Inquiry"
-          />
+          <div class="field">
+            <label for="name">Your Name</label>
+            <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+          </div>
 
-          <input name="name" type="text" placeholder="Your Name" required />
+          <div class="field">
+            <label for="email">Your Email</label>
+            <input id="email" name="email" type="email" placeholder="jane@email.com" required />
+          </div>
 
-          <input name="email" type="email" placeholder="Your Email" required />
+          <div class="field">
+            <label for="phone">Phone Number <span>(optional)</span></label>
+            <input id="phone" name="phone" type="tel" placeholder="(204) 555-0123" />
+          </div>
 
-          <input
-            name="phone"
-            type="tel"
-            placeholder="Phone Number (optional)"
-          />
+          <div class="field">
+            <label for="service">Service</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>Portrait Session</option>
+              <option>Individual Athlete Session</option>
+              <option>Couples Shoot</option>
+              <option>Family Session</option>
+              <option>Sports Coverage</option>
+              <option>Custom Inquiry</option>
+            </select>
+          </div>
 
-          <select name="service" required>
-            <option value="">Select Service</option>
-            <option>Portrait Session</option>
-            <option>Individual Athlete Session</option>
-            <option>Couples Shoot</option>
-            <option>Family Session</option>
-            <option>Sports Coverage</option>
-            <option>Custom Inquiry</option>
-          </select>
+          <div class="field field-wide">
+            <label for="message">Tell me about your shoot</label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Preferred date, location, and any ideas you have..."
+              required
+            ></textarea>
+          </div>
 
-          <textarea
-            name="message"
-            placeholder="Tell me about your shoot, preferred date, location, and any ideas you have..."
-            required
-          ></textarea>
-
-          <button type="submit">Send Inquiry</button>
+          <button type="submit" class="btn submit-btn">Send Inquiry</button>
         </form>
       </section>
     </main>
 
-    <footer>
-      <p>© 2026 Noah Manaigre Photography • Winnipeg, Manitoba</p>
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <p class="footer-name">Noah Manaigre</p>
+          <p>Photographer &middot; Winnipeg, Manitoba</p>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#booking">Book</a></li>
+          <li><a href="#main" class="back-to-top">Back to top</a></li>
+        </ul>
+      </div>
     </footer>
+
+    <script src="script.js"></script>
   </body>
 </html>
