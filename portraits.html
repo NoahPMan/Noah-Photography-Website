@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portrait photography by Noah Manaigre, Winnipeg — individual, lifestyle, and outdoor portrait sessions." />
+    <meta
+      name="description"
+      content="Portrait photography by Noah Manaigre, Winnipeg — individual, lifestyle, and outdoor portrait sessions."
+    />
     <meta property="og:title" content="Portrait Photography — Noah Manaigre" />
-    <meta property="og:description" content="Portrait photography by Noah Manaigre, Winnipeg — individual, lifestyle, and outdoor portrait sessions." />
+    <meta
+      property="og:description"
+      content="Portrait photography by Noah Manaigre, Winnipeg — individual, lifestyle, and outdoor portrait sessions."
+    />
     <meta property="og:image" content="photos/DSC03633.JPEG" />
     <meta property="og:type" content="website" />
     <title>Portraits Photography — Noah Manaigre</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://googleapis.com" />
+    <link rel="preconnect" href="https://gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
+      href="https://googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -45,7 +51,9 @@
           <li><a href="street.html">Street</a></li>
           <li><a href="nature.html">Nature</a></li>
           <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#booking" class="nav-cta">Book a Session</a></li>
+          <li>
+            <a href="index.html#booking" class="nav-cta">Book a Session</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -57,26 +65,89 @@
         <div class="category-hero-content">
           <div>
             <h1>Portraits</h1>
-            <p class="lede">Individual and lifestyle portraits, shot with natural light and minimal direction.</p>
+            <p class="lede">
+              Individual and lifestyle portraits, shot with natural light and
+              minimal direction.
+            </p>
           </div>
-          <p class="category-count">3 photos</p>
+          <p class="category-count">6 photos</p>
         </div>
       </section>
 
       <section class="gallery-section">
         <div class="portfolio-grid">
-          <button class="portfolio-item wide" data-caption="Outdoor portrait photography">
-            <img src="photos/DSC03633.JPEG" alt="Outdoor portrait photography" loading="lazy" />
+          <!-- Row 1: Horizontal Wide Shot (Blonde girl) -->
+          <button
+            class="portfolio-item wide"
+            data-caption="Outdoor portrait photography"
+          >
+            <img
+              src="photos/DSC03633.JPEG"
+              alt="Outdoor portrait photography"
+              loading="lazy"
+            />
             <span class="frame-caption">Outdoor portrait photography</span>
           </button>
 
-          <button class="portfolio-item" data-caption="Lifestyle portrait session">
-            <img src="photos/IMG_7468.JPG" alt="Lifestyle portrait session" loading="lazy" />
+          <!-- Row 2: Horizontal Wide Shot (Musician playing guitar - Fixed to Wide) -->
+          <button class="portfolio-item" data-caption="Musician playing guitar">
+            <img
+              src="photos/DSC02080.jpg"
+              alt="Musician playing guitar"
+              loading="lazy"
+            />
+            <span class="frame-caption">Street portrait photography</span>
+          </button>
+
+          <!-- Row 3: Two Vertical Portraits side-by-side (Perfectly balanced pair) -->
+
+          <!-- Row 4: Horizontal Wide Shot (Mounties) -->
+          <button
+            class="portfolio-item"
+            data-caption="Street portrait with instrument"
+          >
+            <img
+              src="photos/DSC05844.jpg"
+              alt="Street portrait with instrument"
+              loading="lazy"
+            />
+            <span class="frame-caption">Street portrait photography</span>
+          </button>
+
+          <button
+            class="portfolio-item wide"
+            data-caption="Lifestyle portrait session"
+          >
+            <img
+              src="photos/IMG_2767.jpg"
+              alt="Lifestyle portrait session"
+              loading="lazy"
+            />
             <span class="frame-caption">Lifestyle portrait session</span>
           </button>
 
-          <button class="portfolio-item" data-caption="Street photography">
-            <img src="photos/IMG_0432 copy.JPEG" alt="Street photography" loading="lazy" />
+          <!-- Row 5: Horizontal Wide Shot (Couple) -->
+          <button
+            class="portfolio-item wide"
+            data-caption="Engagement portrait session"
+          >
+            <img
+              src="photos/DSC04815.jpg"
+              alt="Engagement portrait session"
+              loading="lazy"
+            />
+            <span class="frame-caption">Engagement portrait session</span>
+          </button>
+
+          <button
+            class="portfolio-item"
+            data-caption="Market vendor outdoor portrait"
+          >
+            <img
+              src="photos/DSC02936.jpg"
+              alt="Market vendor outdoor portrait"
+              loading="lazy"
+            />
             <span class="frame-caption">Street portrait photography</span>
           </button>
         </div>
@@ -105,11 +176,29 @@
     </footer>
 
     <div class="lightbox" id="lightbox" aria-hidden="true">
-      <button class="lightbox-close" id="lightboxClose" aria-label="Close image">&times;</button>
-      <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+      <button
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close image"
+      >
+        &times;
+      </button>
+      <button
+        class="lightbox-nav prev"
+        id="lightboxPrev"
+        aria-label="Previous image"
+      >
+        ‹
+      </button>
       <img src="" alt="" id="lightboxImg" />
       <p class="lightbox-caption" id="lightboxCaption"></p>
-      <button class="lightbox-nav next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+      <button
+        class="lightbox-nav next"
+        id="lightboxNext"
+        aria-label="Next image"
+      >
+        ›
+      </button>
     </div>
 
     <script src="script.js"></script>
