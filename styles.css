@@ -1433,3 +1433,57 @@ p {
   background: #f8ecea;
   border-color: rgba(122, 48, 44, 0.3);
 }
+
+.pricing-note {
+  max-width: var(--max);
+  margin: 32px auto 0;
+  color: var(--grey);
+  font-size: 0.95rem;
+}
+
+.pricing-group {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.pricing-group+.pricing-group {
+  margin-top: 64px;
+}
+
+.pricing-group-title {
+  margin-bottom: 18px;
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.price-info p,
+.services-section .section-note,
+.pricing-note {
+  color: var(--ink-soft);
+}
+
+.pricing-note {
+  max-width: var(--max);
+  margin: 40px auto 0;
+  padding-top: 24px;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--hairline);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 700px) {
+  .pricing-group+.pricing-group {
+    margin-top: 48px;
+  }
+
+  .pricing-group-title {
+    margin-bottom: 12px;
+  }
+
+  .pricing-note {
+    margin-top: 32px;
+  }
+}
