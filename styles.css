@@ -369,10 +369,10 @@ p {
 
 .index-row {
   display: grid;
-  grid-template-columns: 110px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(260px, 36%) minmax(0, 1fr) auto;
   align-items: center;
-  gap: 32px;
-  padding: 28px 0;
+  gap: 48px;
+  padding: 36px 0;
   color: var(--ink);
   border-bottom: 1px solid var(--hairline);
   text-decoration: none;
@@ -384,13 +384,14 @@ p {
 }
 
 .index-row:hover {
-  opacity: 0.72;
+  opacity: 0.82;
 }
 
 .index-thumb {
   display: block;
-  width: 110px;
-  height: 84px;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
   background: var(--paper-dim);
 }
@@ -399,6 +400,11 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.index-row:hover .index-thumb img {
+  transform: scale(1.025);
 }
 
 .index-info {
@@ -407,15 +413,16 @@ p {
 }
 
 .index-info h3 {
-  font-size: 1.7rem;
+  font-size: clamp(2rem, 3vw, 2.8rem);
   overflow-wrap: break-word;
 }
 
 .index-info p {
-  max-width: 48ch;
-  margin-top: 6px;
+  max-width: 42ch;
+  margin-top: 10px;
   color: var(--grey);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .index-count {
@@ -423,6 +430,19 @@ p {
   font-family: var(--font-body);
   font-size: 0.85rem;
   white-space: nowrap;
+}
+
+/* Keep the category rows slightly smaller on tablets */
+@media (min-width: 701px) and (max-width: 900px) {
+  .index-row {
+    grid-template-columns: 220px minmax(0, 1fr) auto;
+    gap: 28px;
+    padding: 30px 0;
+  }
+
+  .index-info h3 {
+    font-size: 2rem;
+  }
 }
 
 /* =============== CATEGORY PAGE HERO =============== */
@@ -1386,4 +1406,30 @@ p {
   .portfolio-index .index-info h3 {
     font-size: 1.8rem !important;
   }
+}
+
+.submit-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.form-status {
+  grid-column: 1 / -1;
+  margin: 8px 0 0;
+  padding: 14px 16px;
+  border: 1px solid var(--hairline);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form-status.success {
+  color: #365b3c;
+  background: #edf4ec;
+  border-color: rgba(54, 91, 60, 0.3);
+}
+
+.form-status.error {
+  color: #7a302c;
+  background: #f8ecea;
+  border-color: rgba(122, 48, 44, 0.3);
 }
