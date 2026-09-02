@@ -1487,3 +1487,7 @@ p {
     margin-top: 32px;
   }
 }
+
+.nav-cta {
+  white-space: nowrap;
+}
