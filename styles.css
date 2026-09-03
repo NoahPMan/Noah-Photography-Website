@@ -1158,7 +1158,7 @@ p {
 
   .portfolio-item.wide {
     grid-column: span 1;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 16 / 10;
   }
 
   .frame-caption {
