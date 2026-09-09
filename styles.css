@@ -1511,7 +1511,7 @@ p {
   flex-shrink: 0;
 }
 
-/* Hide captions on devices with coarse pointer (touch) or narrow screens */
+/* Completely hide gallery captions on touch devices / small screens */
 @media (pointer: coarse),
 (max-width: 768px) {
 
@@ -1527,5 +1527,15 @@ p {
     margin: 0 !important;
     padding: 0 !important;
     overflow: hidden !important;
+    pointer-events: none !important;
+    user-select: none !important;
+  }
+
+  /* Ensure focus/active states can't reveal captions */
+  figure:focus-within figcaption,
+  figure:active figcaption,
+  a:active .caption,
+  button:active .caption {
+    display: none !important;
   }
 }
