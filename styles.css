@@ -1510,32 +1510,3 @@ p {
 .footer-links svg {
   flex-shrink: 0;
 }
-
-/* Completely hide gallery captions on touch devices / small screens */
-@media (pointer: coarse),
-(max-width: 768px) {
-
-  figcaption,
-  .caption,
-  .frame-caption,
-  .photo-caption,
-  .gallery-caption,
-  .gallery .caption {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    pointer-events: none !important;
-    user-select: none !important;
-  }
-
-  /* Ensure focus/active states can't reveal captions */
-  figure:focus-within figcaption,
-  figure:active figcaption,
-  a:active .caption,
-  button:active .caption {
-    display: none !important;
-  }
-}
