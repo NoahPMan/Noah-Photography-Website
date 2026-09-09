@@ -1510,3 +1510,22 @@ p {
 .footer-links svg {
   flex-shrink: 0;
 }
+
+/* Hide captions on devices with coarse pointer (touch) or narrow screens */
+@media (pointer: coarse),
+(max-width: 768px) {
+
+  figcaption,
+  .caption,
+  .frame-caption,
+  .photo-caption,
+  .gallery-caption,
+  .gallery .caption {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+}
