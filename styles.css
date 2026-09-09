@@ -1434,13 +1434,6 @@ p {
   border-color: rgba(122, 48, 44, 0.3);
 }
 
-.pricing-note {
-  max-width: var(--max);
-  margin: 32px auto 0;
-  color: var(--grey);
-  font-size: 0.95rem;
-}
-
 .pricing-group {
   max-width: var(--max);
   margin: 0 auto;
@@ -1490,4 +1483,30 @@ p {
 
 .nav-cta {
   white-space: nowrap;
+}
+
+/* =============== FINAL BOOKING AND FOOTER POLISH =============== */
+
+.booking-section {
+  padding-bottom: 72px;
+}
+
+.site-footer,
+.footer-links a {
+  color: #aaa294;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--off-white);
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.footer-links svg {
+  flex-shrink: 0;
 }
