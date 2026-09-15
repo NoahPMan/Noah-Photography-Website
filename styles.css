@@ -1510,3 +1510,15 @@ p {
 .footer-links svg {
   flex-shrink: 0;
 }
+
+/* Tighter transition from hero to portfolio on desktop */
+
+@media (min-width: 901px) {
+  .hero {
+    padding-bottom: 64px;
+  }
+
+  .portfolio-index {
+    padding-top: 64px;
+  }
+}
