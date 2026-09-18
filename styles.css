@@ -1522,3 +1522,12 @@ p {
     padding-top: 64px;
   }
 }
+
+.site-footer {
+  color: #d2cdc4;
+}
+
+.site-footer .copyright {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
