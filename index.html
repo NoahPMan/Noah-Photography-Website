@@ -279,20 +279,20 @@
             </li>
 
             <li class="price-row">
-<div class="price-info">
-<h3>Team Coverage</h3>
-<p>
-Coverage focused across a team during a game or event • Action
-moments, celebrations, and key plays
-</p>
-</div>
-<p class="price">From $450</p>
-</li>
-</ul>
-</div>
- 
-<div class="pricing-group">
-<p class="pricing-group-title">Events</p>
+              <div class="price-info">
+                <h3>Team Coverage</h3>
+                <p>
+                  Coverage focused across a team during a game or event • Action
+                  moments, celebrations, and key plays
+                </p>
+              </div>
+              <p class="price">From $450</p>
+            </li>
+          </ul>
+        </div>
+         
+        <div class="pricing-group">
+          <p class="pricing-group-title">Events</p>
 
           <ul class="price-list">
             <li class="price-row">
@@ -314,6 +314,33 @@ moments, celebrations, and key plays
           best fits your needs, feel free to reach out and we'll find the right
           option together.
         </p>
+
+        <div class="print-addon">
+          <div class="print-addon-content">
+            <div>
+              <p class="pricing-group-title">Optional Add-On</p>
+
+              <h3>Signature Print Collection</h3>
+
+              <p class="print-addon-description">
+                Turn your favourite photographs into a curated collection of
+                professionally printed artwork.
+              </p>
+
+              <ul class="print-addon-list">
+                <li>1 large gallery print</li>
+                <li>2 medium display prints</li>
+                <li>4 keepsake prints</li>
+              </ul>
+
+              <p class="print-addon-availability">
+                Available with eligible full sessions.
+              </p>
+            </div>
+
+            <p class="print-addon-price">+$145</p>
+          </div>
+        </div>
       </section>
 
       <!-- BOOKING -->
@@ -334,6 +361,7 @@ moments, celebrations, and key plays
           class="booking-form"
           action="https://formspree.io/f/xzdwjyad"
           method="POST"
+          novalidate
         >
           <input
             type="hidden"
@@ -405,7 +433,6 @@ moments, celebrations, and key plays
                 </option>
 
                 <option value="Team Coverage">Team Coverage</option>
-
               </optgroup>
 
               <optgroup label="Events & Custom">
@@ -416,6 +443,22 @@ moments, celebrations, and key plays
                 <option value="Custom Inquiry">Custom Inquiry</option>
               </optgroup>
             </select>
+          </div>
+
+          <div class="field field-wide print-option">
+            <label class="checkbox-label" for="printCollection">
+              <input
+                id="printCollection"
+                name="signature_print_collection"
+                type="checkbox"
+                value="Yes"
+              />
+              Add the Signature Print Collection (+$145)
+            </label>
+
+            <p id="printNote" class="field-note" hidden>
+              Available with full sessions.
+            </p>
           </div>
 
           <div class="field field-wide">
@@ -471,7 +514,7 @@ moments, celebrations, and key plays
 
           <li><a href="#main" class="back-to-top">Back to top</a></li>
         </ul>
-         <p class="copyright">© 2026 Noah Manaigre Photography</p>
+        <p class="copyright">© 2026 Noah Manaigre Photography</p>
       </div>
     </footer>
 
