@@ -1,622 +1,725 @@
-// Mobile navigation
-const navToggle = document.getElementById("navToggle");
-const navMenu = document.getElementById("navMenu");
+(() => {
+  "use strict";
 
-if (navToggle && navMenu) {
-  navToggle.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("open");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-    document.body.classList.toggle("menu-open", isOpen);
-  });
+  // Mobile navigation
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
 
-  navMenu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
-    });
-  });
+  if (navToggle && navMenu) {
+    const mobileNavigation = window.matchMedia("(max-width: 900px)");
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && navMenu.classList.contains("open")) {
-      navMenu.classList.remove("open");
-      navToggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("menu-open");
-      navToggle.focus();
+    function setMenuOpen(isOpen) {
+      navMenu.classList.toggle("open", isOpen);
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation" : "Open navigation",
+      );
+      navMenu.inert = mobileNavigation.matches && !isOpen;
+      document.body.classList.toggle("menu-open", isOpen);
     }
-  });
-}
 
-// Featured hero carousel
-const showcaseHero = document.getElementById("featuredWork");
-
-if (showcaseHero) {
-  const slides = Array.from(showcaseHero.querySelectorAll(".showcase-slide"));
-  const dots = Array.from(showcaseHero.querySelectorAll(".showcase-dot"));
-  const previousButton = document.getElementById("showcasePrevious");
-  const nextButton = document.getElementById("showcaseNext");
-  const pauseButton = document.getElementById("showcasePause");
-  const status = document.getElementById("showcaseStatus");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-  const intervalDuration = 5500;
-  let currentSlide = 0;
-  let autoplayTimer = null;
-  let isPaused = reduceMotion.matches;
-  let touchStartX = 0;
-
-  function showSlide(index, announce = true) {
-    currentSlide = (index + slides.length) % slides.length;
-
-    slides.forEach((slide, slideIndex) => {
-      const active = slideIndex === currentSlide;
-      slide.classList.toggle("active", active);
-      slide.setAttribute("aria-hidden", String(!active));
-    });
-
-    dots.forEach((dot, dotIndex) => {
-      const active = dotIndex === currentSlide;
-      dot.classList.toggle("active", active);
-
-      if (active) {
-        dot.setAttribute("aria-current", "true");
+    function updateNavigationMode() {
+      if (mobileNavigation.matches) {
+        setMenuOpen(false);
       } else {
-        dot.removeAttribute("aria-current");
+        navMenu.classList.remove("open");
+        navMenu.inert = false;
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open navigation");
+        document.body.classList.remove("menu-open");
+      }
+    }
+
+    navToggle.addEventListener("click", () => {
+      setMenuOpen(navToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    navMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        if (mobileNavigation.matches) {
+          setMenuOpen(false);
+        }
+      });
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navMenu.classList.contains("open")) {
+        setMenuOpen(false);
+        navToggle.focus();
       }
     });
 
-    if (announce && status) {
-      status.textContent = slides[currentSlide].dataset.label || `Featured photograph ${currentSlide + 1}`;
-    }
-  }
-
-  function stopAutoplay() {
-    window.clearInterval(autoplayTimer);
-    autoplayTimer = null;
-  }
-
-  function startAutoplay() {
-    stopAutoplay();
-
-    if (isPaused || reduceMotion.matches || document.hidden) {
-      return;
+    if (typeof mobileNavigation.addEventListener === "function") {
+      mobileNavigation.addEventListener("change", updateNavigationMode);
+    } else {
+      mobileNavigation.addListener(updateNavigationMode);
     }
 
-    autoplayTimer = window.setInterval(() => {
-      showSlide(currentSlide + 1, false);
-    }, intervalDuration);
+    updateNavigationMode();
   }
 
-  function restartAutoplay() {
-    if (!isPaused) {
-      startAutoplay();
-    }
-  }
+  // Featured photography carousel
+  const showcaseHero = document.getElementById("featuredWork");
 
-  function updatePauseButton() {
-    if (!pauseButton) {
-      return;
-    }
-
-    pauseButton.setAttribute("aria-pressed", String(isPaused));
-    pauseButton.setAttribute(
-      "aria-label",
-      isPaused ? "Play featured photographs" : "Pause featured photographs",
+  if (showcaseHero) {
+    const slides = Array.from(
+      showcaseHero.querySelectorAll(".showcase-slide"),
     );
+    const dots = Array.from(showcaseHero.querySelectorAll(".showcase-dot"));
+    const previousButton = document.getElementById("showcasePrevious");
+    const nextButton = document.getElementById("showcaseNext");
+    const pauseButton = document.getElementById("showcasePause");
+    const status = document.getElementById("showcaseStatus");
 
-    const label = pauseButton.querySelector("span");
+    if (slides.length > 0) {
+      const intervalDuration = 5500;
+      let currentSlide = Math.max(
+        0,
+        slides.findIndex((slide) => slide.classList.contains("active")),
+      );
+      let autoplayTimer = null;
+      let manuallyPaused = reducedMotion.matches;
+      let explicitPlayback = false;
+      let pointerInside = false;
+      let focusInside = false;
+      let touchInProgress = false;
+      let touchStart = null;
 
-    if (label) {
-      label.textContent = isPaused ? "Play" : "Pause";
-    }
-  }
-
-  previousButton?.addEventListener("click", () => {
-    showSlide(currentSlide - 1);
-    restartAutoplay();
-  });
-
-  nextButton?.addEventListener("click", () => {
-    showSlide(currentSlide + 1);
-    restartAutoplay();
-  });
-
-  dots.forEach((dot) => {
-    dot.addEventListener("click", () => {
-      showSlide(Number(dot.dataset.slide));
-      restartAutoplay();
-    });
-  });
-
-  pauseButton?.addEventListener("click", () => {
-    isPaused = !isPaused;
-    updatePauseButton();
-
-    if (isPaused) {
-      stopAutoplay();
-    } else {
-      startAutoplay();
-    }
-  });
-
-  showcaseHero.addEventListener("mouseenter", stopAutoplay);
-  showcaseHero.addEventListener("mouseleave", restartAutoplay);
-  showcaseHero.addEventListener("focusin", stopAutoplay);
-  showcaseHero.addEventListener("focusout", restartAutoplay);
-
-  showcaseHero.addEventListener(
-    "touchstart",
-    (event) => {
-      touchStartX = event.changedTouches[0].clientX;
-      stopAutoplay();
-    },
-    { passive: true },
-  );
-
-  showcaseHero.addEventListener(
-    "touchend",
-    (event) => {
-      const distance = event.changedTouches[0].clientX - touchStartX;
-
-      if (Math.abs(distance) >= 50) {
-        showSlide(currentSlide + (distance < 0 ? 1 : -1));
+      function autoplayIsPaused() {
+        return (
+          manuallyPaused ||
+          (reducedMotion.matches && !explicitPlayback) ||
+          document.hidden ||
+          pointerInside ||
+          focusInside ||
+          touchInProgress
+        );
       }
 
-      restartAutoplay();
-    },
-    { passive: true },
+      function syncAutoplay() {
+        if (autoplayIsPaused() || slides.length < 2) {
+          window.clearInterval(autoplayTimer);
+          autoplayTimer = null;
+          return;
+        }
+
+        if (autoplayTimer === null) {
+          autoplayTimer = window.setInterval(() => {
+            showSlide(currentSlide + 1, false);
+          }, intervalDuration);
+        }
+      }
+
+      function restartAutoplay() {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+        syncAutoplay();
+      }
+
+      function updatePauseButton() {
+        if (!pauseButton) {
+          return;
+        }
+
+        const isPaused =
+          manuallyPaused || (reducedMotion.matches && !explicitPlayback);
+        pauseButton.setAttribute("aria-pressed", String(isPaused));
+        pauseButton.setAttribute(
+          "aria-label",
+          isPaused
+            ? "Play featured photographs"
+            : "Pause featured photographs",
+        );
+
+        const label = pauseButton.querySelector("span");
+
+        if (label) {
+          label.textContent = isPaused ? "Play" : "Pause";
+        }
+      }
+
+      function showSlide(index, announce = true) {
+        if (!Number.isFinite(index)) {
+          return;
+        }
+
+        currentSlide = ((index % slides.length) + slides.length) % slides.length;
+
+        slides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === currentSlide;
+          const label = slide.dataset.label || `Photograph ${slideIndex + 1}`;
+
+          slide.classList.toggle("active", isActive);
+          slide.setAttribute("aria-hidden", String(!isActive));
+          slide.setAttribute(
+            "aria-label",
+            `${slideIndex + 1} of ${slides.length}: ${label}`,
+          );
+          slide.inert = !isActive;
+        });
+
+        dots.forEach((dot, dotIndex) => {
+          const isActive = dotIndex === currentSlide;
+
+          dot.classList.toggle("active", isActive);
+
+          if (isActive) {
+            dot.setAttribute("aria-current", "true");
+          } else {
+            dot.removeAttribute("aria-current");
+          }
+        });
+
+        if (announce && status) {
+          status.textContent =
+            slides[currentSlide].dataset.label ||
+            `Featured photograph ${currentSlide + 1}`;
+        }
+      }
+
+      previousButton?.addEventListener("click", () => {
+        showSlide(currentSlide - 1);
+        restartAutoplay();
+      });
+
+      nextButton?.addEventListener("click", () => {
+        showSlide(currentSlide + 1);
+        restartAutoplay();
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const index = Number(dot.dataset.slide);
+
+          if (Number.isInteger(index) && index >= 0 && index < slides.length) {
+            showSlide(index);
+            restartAutoplay();
+          }
+        });
+      });
+
+      pauseButton?.addEventListener("click", () => {
+        manuallyPaused = !manuallyPaused;
+        explicitPlayback = !manuallyPaused;
+        updatePauseButton();
+        restartAutoplay();
+      });
+
+      showcaseHero.addEventListener("mouseenter", () => {
+        pointerInside = true;
+        syncAutoplay();
+        updatePauseButton();
+      });
+
+      showcaseHero.addEventListener("mouseleave", () => {
+        pointerInside = false;
+        syncAutoplay();
+        updatePauseButton();
+      });
+
+      showcaseHero.addEventListener("focusin", () => {
+        focusInside = true;
+        syncAutoplay();
+        updatePauseButton();
+      });
+
+      showcaseHero.addEventListener("focusout", (event) => {
+        focusInside =
+          event.relatedTarget instanceof Node &&
+          showcaseHero.contains(event.relatedTarget);
+        syncAutoplay();
+        updatePauseButton();
+      });
+
+      showcaseHero.addEventListener(
+        "touchstart",
+        (event) => {
+          if (event.touches.length !== 1) {
+            touchStart = null;
+            return;
+          }
+
+          touchStart = {
+            x: event.touches[0].clientX,
+            y: event.touches[0].clientY,
+          };
+          touchInProgress = true;
+          syncAutoplay();
+          updatePauseButton();
+        },
+        { passive: true },
+      );
+
+      showcaseHero.addEventListener(
+        "touchend",
+        (event) => {
+          if (touchStart && event.changedTouches.length > 0) {
+            const deltaX = event.changedTouches[0].clientX - touchStart.x;
+            const deltaY = event.changedTouches[0].clientY - touchStart.y;
+
+            if (Math.abs(deltaX) >= 50 && Math.abs(deltaX) > Math.abs(deltaY)) {
+              showSlide(currentSlide + (deltaX < 0 ? 1 : -1));
+            }
+          }
+
+          touchStart = null;
+          touchInProgress = false;
+          restartAutoplay();
+          updatePauseButton();
+        },
+        { passive: true },
+      );
+
+      showcaseHero.addEventListener(
+        "touchcancel",
+        () => {
+          touchStart = null;
+          touchInProgress = false;
+          restartAutoplay();
+          updatePauseButton();
+        },
+        { passive: true },
+      );
+
+      showcaseHero.addEventListener("keydown", (event) => {
+        const target = event.target;
+
+        if (
+          target instanceof HTMLElement &&
+          (target.isContentEditable ||
+            ["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName))
+        ) {
+          return;
+        }
+
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          showSlide(currentSlide - 1);
+          restartAutoplay();
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          showSlide(currentSlide + 1);
+          restartAutoplay();
+        }
+      });
+
+      document.addEventListener("visibilitychange", () => {
+        syncAutoplay();
+        updatePauseButton();
+      });
+
+      const onMotionPreferenceChange = (event) => {
+        if (event.matches) {
+          manuallyPaused = true;
+          explicitPlayback = false;
+        }
+
+        syncAutoplay();
+        updatePauseButton();
+      };
+
+      if (typeof reducedMotion.addEventListener === "function") {
+        reducedMotion.addEventListener("change", onMotionPreferenceChange);
+      } else {
+        reducedMotion.addListener(onMotionPreferenceChange);
+      }
+
+      showSlide(currentSlide, false);
+      updatePauseButton();
+      syncAutoplay();
+    }
+  }
+
+  // Portfolio lightbox
+  const portfolioItems = Array.from(
+    document.querySelectorAll(".portfolio-item"),
   );
+  const lightbox = document.getElementById("lightbox");
 
-  showcaseHero.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      showSlide(currentSlide - 1);
-      restartAutoplay();
+  if (portfolioItems.length > 0 && lightbox) {
+    const lightboxImage = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrevious = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+    let currentIndex = 0;
+    let previousFocus = null;
+    let previousBodyOverflow = "";
+
+    function renderLightboxImage(index) {
+      const image = portfolioItems[index].querySelector("img");
+
+      if (!image || !lightboxImage) {
+        return false;
+      }
+
+      currentIndex = index;
+      lightboxImage.src = image.currentSrc || image.src;
+      lightboxImage.alt = image.alt;
+
+      if (lightboxCaption) {
+        lightboxCaption.textContent =
+          portfolioItems[index].dataset.caption || "";
+      }
+
+      return true;
     }
 
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      showSlide(currentSlide + 1);
-      restartAutoplay();
-    }
-  });
+    function openLightbox(index) {
+      if (index < 0 || index >= portfolioItems.length) {
+        return;
+      }
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      stopAutoplay();
-    } else {
-      restartAutoplay();
-    }
-  });
+      const wasClosed = !lightbox.classList.contains("open");
 
-  reduceMotion.addEventListener?.("change", (event) => {
-    isPaused = event.matches;
-    updatePauseButton();
-    restartAutoplay();
-  });
+      if (!renderLightboxImage(index)) {
+        return;
+      }
 
-  showSlide(0, false);
-  updatePauseButton();
-  startAutoplay();
-}
+      if (wasClosed) {
+        previousFocus = document.activeElement;
+        previousBodyOverflow = document.body.style.overflow;
+      }
 
-// Lightbox
-const items = Array.from(document.querySelectorAll(".portfolio-item"));
-const lightbox = document.getElementById("lightbox");
+      lightbox.classList.add("open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
 
-if (items.length > 0 && lightbox) {
-  const lightboxImg = document.getElementById("lightboxImg");
-  const lightboxCaption = document.getElementById("lightboxCaption");
-  const lightboxClose = document.getElementById("lightboxClose");
-  const lightboxPrev = document.getElementById("lightboxPrev");
-  const lightboxNext = document.getElementById("lightboxNext");
-
-  let currentIndex = 0;
-  let previousFocus = null;
-
-  function openLightbox(index) {
-    currentIndex = index;
-    previousFocus = document.activeElement;
-
-    const item = items[currentIndex];
-    const image = item.querySelector("img");
-
-    if (!image || !lightboxImg) {
-      return;
+      if (wasClosed && lightboxClose) {
+        lightboxClose.focus();
+      }
     }
 
-    lightboxImg.src = image.currentSrc || image.src;
-    lightboxImg.alt = image.alt;
+    function closeLightbox() {
+      if (!lightbox.classList.contains("open")) {
+        return;
+      }
 
-    if (lightboxCaption) {
-      lightboxCaption.textContent = item.dataset.caption || "";
+      lightbox.classList.remove("open");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = previousBodyOverflow;
+
+      if (lightboxImage) {
+        lightboxImage.removeAttribute("src");
+        lightboxImage.alt = "";
+      }
+
+      if (previousFocus instanceof HTMLElement) {
+        previousFocus.focus();
+      }
     }
 
-    lightbox.classList.add("open");
-    lightbox.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    function showRelative(direction) {
+      const nextIndex =
+        (currentIndex + direction + portfolioItems.length) %
+        portfolioItems.length;
 
-    if (lightboxClose) {
-      lightboxClose.focus();
-    }
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    lightbox.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-
-    if (lightboxImg) {
-      lightboxImg.src = "";
+      openLightbox(nextIndex);
     }
 
-    if (previousFocus) {
-      previousFocus.focus();
-    }
-  }
-
-  function showRelative(direction) {
-    currentIndex = (currentIndex + direction + items.length) % items.length;
-
-    openLightbox(currentIndex);
-  }
-
-  items.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      openLightbox(index);
+    portfolioItems.forEach((item, index) => {
+      item.addEventListener("click", () => openLightbox(index));
     });
-  });
 
-  if (lightboxClose) {
-    lightboxClose.addEventListener("click", closeLightbox);
-  }
+    lightboxClose?.addEventListener("click", closeLightbox);
+    lightboxPrevious?.addEventListener("click", () => showRelative(-1));
+    lightboxNext?.addEventListener("click", () => showRelative(1));
 
-  if (lightboxPrev) {
-    lightboxPrev.addEventListener("click", () => {
-      showRelative(-1);
+    lightbox.addEventListener("click", (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
     });
-  }
 
-  if (lightboxNext) {
-    lightboxNext.addEventListener("click", () => {
-      showRelative(1);
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.classList.contains("open")) {
+        return;
+      }
+
+      if (event.key === "Escape") {
+        closeLightbox();
+      } else if (event.key === "ArrowLeft") {
+        showRelative(-1);
+      } else if (event.key === "ArrowRight") {
+        showRelative(1);
+      }
     });
   }
 
-  lightbox.addEventListener("click", (event) => {
-    if (event.target === lightbox) {
-      closeLightbox();
-    }
-  });
+  // Signature Print Collection availability
+  const serviceSelect = document.getElementById("service");
+  const printCollection = document.getElementById("printCollection");
+  const printNote = document.getElementById("printNote");
 
-  document.addEventListener("keydown", (event) => {
-    if (!lightbox.classList.contains("open")) {
+  function updatePrintAvailability() {
+    if (!serviceSelect || !printCollection) {
       return;
     }
 
-    if (event.key === "Escape") {
-      closeLightbox();
+    const isPortraitMini = serviceSelect.value === "Portrait Mini";
+
+    printCollection.disabled = isPortraitMini;
+
+    if (isPortraitMini) {
+      printCollection.checked = false;
     }
 
-    if (event.key === "ArrowLeft") {
-      showRelative(-1);
+    if (printNote) {
+      printNote.hidden = !isPortraitMini;
     }
-
-    if (event.key === "ArrowRight") {
-      showRelative(1);
-    }
-  });
-}
-
-// Print collection availability
-const serviceSelect = document.getElementById("service");
-const printCollection = document.getElementById("printCollection");
-const printNote = document.getElementById("printNote");
-
-function updatePrintAvailability() {
-  if (!serviceSelect || !printCollection) {
-    return;
   }
 
-  const isPortraitMini = serviceSelect.value === "Portrait Mini";
-
-  printCollection.disabled = isPortraitMini;
-
-  if (isPortraitMini) {
-    printCollection.checked = false;
+  if (serviceSelect && printCollection) {
+    serviceSelect.addEventListener("change", updatePrintAvailability);
+    updatePrintAvailability();
   }
 
-  if (printNote) {
-    printNote.hidden = !isPortraitMini;
-  }
-}
+  // Booking form validation and Formspree submission
+  const bookingForm = document.querySelector(".booking-form");
 
-if (serviceSelect && printCollection) {
-  serviceSelect.addEventListener("change", updatePrintAvailability);
+  if (bookingForm) {
+    const submitButton = bookingForm.querySelector(".submit-btn");
+    const fields = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      phone: document.getElementById("phone"),
+      service: document.getElementById("service"),
+      message: document.getElementById("message"),
+    };
 
-  updatePrintAvailability();
-}
-
-// Booking form validation and Formspree submission
-const bookingForm = document.querySelector(".booking-form");
-
-if (bookingForm) {
-  const submitButton = bookingForm.querySelector(".submit-btn");
-
-  const fields = {
-    name: document.getElementById("name"),
-    email: document.getElementById("email"),
-    phone: document.getElementById("phone"),
-    service: document.getElementById("service"),
-    message: document.getElementById("message"),
-  };
-
-  function removeError(field) {
-    if (!field) {
+    if (Object.values(fields).some((field) => !field)) {
+      console.error("The booking form is missing one or more required fields.");
       return;
     }
 
-    field.classList.remove("input-error");
-    field.removeAttribute("aria-invalid");
-    field.removeAttribute("aria-describedby");
+    function removeError(field) {
+      const errorId = `${field.id}-error`;
+      const describedBy = (field.getAttribute("aria-describedby") || "")
+        .split(/\s+/)
+        .filter((id) => id && id !== errorId);
 
-    const existingError = document.getElementById(`${field.id}-error`);
+      field.classList.remove("input-error");
+      field.removeAttribute("aria-invalid");
 
-    if (existingError) {
-      existingError.remove();
-    }
-  }
+      if (describedBy.length > 0) {
+        field.setAttribute("aria-describedby", describedBy.join(" "));
+      } else {
+        field.removeAttribute("aria-describedby");
+      }
 
-  function showError(field, message) {
-    if (!field) {
-      return;
-    }
-
-    removeError(field);
-
-    const fieldContainer = field.closest(".field");
-
-    if (!fieldContainer) {
-      return;
+      document.getElementById(errorId)?.remove();
     }
 
-    const error = document.createElement("p");
-    const errorId = `${field.id}-error`;
+    function showError(field, message) {
+      removeError(field);
 
-    error.id = errorId;
-    error.className = "field-error";
-    error.textContent = message;
+      const fieldContainer = field.closest(".field");
 
-    field.classList.add("input-error");
-    field.setAttribute("aria-invalid", "true");
-    field.setAttribute("aria-describedby", errorId);
+      if (!fieldContainer) {
+        console.error(`The booking field "${field.id}" has no field container.`);
+        return;
+      }
 
-    fieldContainer.appendChild(error);
-  }
+      const error = document.createElement("p");
+      const errorId = `${field.id}-error`;
+      const describedBy = (field.getAttribute("aria-describedby") || "")
+        .split(/\s+/)
+        .filter(Boolean);
 
-  function validateName() {
-    const value = fields.name.value.trim();
+      error.id = errorId;
+      error.className = "field-error";
+      error.textContent = message;
 
-    if (value.length < 2) {
-      showError(fields.name, "Please enter your name.");
-      return false;
+      field.classList.add("input-error");
+      field.setAttribute("aria-invalid", "true");
+      field.setAttribute(
+        "aria-describedby",
+        [...describedBy, errorId].join(" "),
+      );
+
+      fieldContainer.appendChild(error);
     }
 
-    removeError(fields.name);
-    return true;
-  }
+    function validateName() {
+      if (fields.name.value.trim().length < 2) {
+        showError(fields.name, "Please enter your name.");
+        return false;
+      }
 
-  function validateEmail() {
-    const value = fields.email.value.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!value) {
-      showError(fields.email, "Please enter your email address.");
-
-      return false;
+      removeError(fields.name);
+      return true;
     }
 
-    if (!emailPattern.test(value)) {
-      showError(fields.email, "Please enter a valid email address.");
+    function validateEmail() {
+      const value = fields.email.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      return false;
+      if (!value) {
+        showError(fields.email, "Please enter your email address.");
+        return false;
+      }
+
+      if (!emailPattern.test(value)) {
+        showError(fields.email, "Please enter a valid email address.");
+        return false;
+      }
+
+      removeError(fields.email);
+      return true;
     }
 
-    removeError(fields.email);
-    return true;
-  }
+    function validatePhone() {
+      const value = fields.phone.value.trim();
 
-  function validatePhone() {
-    const value = fields.phone.value.trim();
+      if (!value) {
+        removeError(fields.phone);
+        return true;
+      }
 
-    if (!value) {
+      const digits = value.replace(/\D/g, "");
+
+      if (digits.length < 10 || digits.length > 15) {
+        showError(fields.phone, "Please enter a valid phone number.");
+        return false;
+      }
+
       removeError(fields.phone);
       return true;
     }
 
-    const digits = value.replace(/\D/g, "");
-
-    if (digits.length < 10 || digits.length > 15) {
-      showError(fields.phone, "Please enter a valid phone number.");
-
-      return false;
-    }
-
-    removeError(fields.phone);
-    return true;
-  }
-
-  function validateService() {
-    if (!fields.service.value) {
-      showError(fields.service, "Please select a service.");
-
-      return false;
-    }
-
-    removeError(fields.service);
-    return true;
-  }
-
-  function validateMessage() {
-    const value = fields.message.value.trim();
-
-    if (!value) {
-      showError(fields.message, "Please tell me about your session.");
-
-      return false;
-    }
-
-    if (value.length < 15) {
-      showError(fields.message, "Please include a few more session details.");
-
-      return false;
-    }
-
-    removeError(fields.message);
-    return true;
-  }
-
-  function validateForm() {
-    const results = [
-      {
-        field: fields.name,
-        valid: validateName(),
-      },
-      {
-        field: fields.email,
-        valid: validateEmail(),
-      },
-      {
-        field: fields.phone,
-        valid: validatePhone(),
-      },
-      {
-        field: fields.service,
-        valid: validateService(),
-      },
-      {
-        field: fields.message,
-        valid: validateMessage(),
-      },
-    ];
-
-    const firstInvalid = results.find((result) => !result.valid);
-
-    if (firstInvalid) {
-      firstInvalid.field.focus();
-
-      firstInvalid.field.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-
-      return false;
-    }
-
-    return true;
-  }
-
-  fields.name.addEventListener("blur", validateName);
-  fields.email.addEventListener("blur", validateEmail);
-  fields.phone.addEventListener("blur", validatePhone);
-  fields.service.addEventListener("change", validateService);
-  fields.message.addEventListener("blur", validateMessage);
-
-  bookingForm.addEventListener("input", (event) => {
-    const field = event.target;
-
-    if (field.classList.contains("input-error")) {
-      removeError(field);
-    }
-  });
-
-  bookingForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    if (!validateForm()) {
-      return;
-    }
-
-    const originalButtonText = submitButton
-      ? submitButton.textContent
-      : "Send Inquiry";
-
-    const existingStatus = bookingForm.querySelector(".form-status");
-
-    if (existingStatus) {
-      existingStatus.remove();
-    }
-
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = "Sending...";
-    }
-
-    try {
-      const response = await fetch(bookingForm.action, {
-        method: "POST",
-        body: new FormData(bookingForm),
-        headers: {
-          Accept: "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Submission failed");
+    function validateService() {
+      if (!fields.service.value) {
+        showError(fields.service, "Please select a service.");
+        return false;
       }
 
-      bookingForm.reset();
+      removeError(fields.service);
+      return true;
+    }
 
-      Object.values(fields).forEach((field) => {
-        removeError(field);
+    function validateMessage() {
+      const value = fields.message.value.trim();
+
+      if (!value) {
+        showError(fields.message, "Please tell me about your session.");
+        return false;
+      }
+
+      if (value.length < 15) {
+        showError(fields.message, "Please include a few more session details.");
+        return false;
+      }
+
+      removeError(fields.message);
+      return true;
+    }
+
+    function validateForm() {
+      const results = [
+        { field: fields.name, valid: validateName() },
+        { field: fields.email, valid: validateEmail() },
+        { field: fields.phone, valid: validatePhone() },
+        { field: fields.service, valid: validateService() },
+        { field: fields.message, valid: validateMessage() },
+      ];
+      const firstInvalid = results.find((result) => !result.valid);
+
+      if (firstInvalid) {
+        firstInvalid.field.focus();
+        firstInvalid.field.scrollIntoView({
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+          block: "center",
+        });
+        return false;
+      }
+
+      return true;
+    }
+
+    function showFormStatus(message, type) {
+      bookingForm.querySelector(".form-status")?.remove();
+
+      const formStatus = document.createElement("p");
+      formStatus.className = `form-status ${type}`;
+      formStatus.setAttribute("role", type === "error" ? "alert" : "status");
+      formStatus.textContent = message;
+      bookingForm.appendChild(formStatus);
+      formStatus.scrollIntoView({
+        behavior: reducedMotion.matches ? "auto" : "smooth",
+        block: "nearest",
       });
+    }
 
-      updatePrintAvailability();
+    fields.name.addEventListener("blur", validateName);
+    fields.email.addEventListener("blur", validateEmail);
+    fields.phone.addEventListener("blur", validatePhone);
+    fields.service.addEventListener("change", validateService);
+    fields.message.addEventListener("blur", validateMessage);
 
-      showFormStatus("Thanks! Your inquiry was sent successfully.", "success");
+    bookingForm.addEventListener("input", (event) => {
+      if (
+        event.target instanceof Element &&
+        event.target.classList.contains("input-error")
+      ) {
+        removeError(event.target);
+      }
+    });
+
+    bookingForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!validateForm()) {
+        return;
+      }
+
+      const originalButtonText = submitButton
+        ? submitButton.textContent
+        : "Send Inquiry";
+
+      bookingForm.querySelector(".form-status")?.remove();
 
       if (submitButton) {
-        submitButton.textContent = "Inquiry Sent!";
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
       }
 
-      window.setTimeout(() => {
+      try {
+        const response = await fetch(bookingForm.action, {
+          method: "POST",
+          body: new FormData(bookingForm),
+          headers: { Accept: "application/json" },
+        });
+
+        if (!response.ok) {
+          throw new Error(`Formspree returned HTTP ${response.status}.`);
+        }
+
+        bookingForm.reset();
+        Object.values(fields).forEach(removeError);
+        updatePrintAvailability();
+        showFormStatus("Thanks! Your inquiry was sent successfully.", "success");
+
         if (submitButton) {
-          submitButton.textContent = originalButtonText;
+          submitButton.textContent = "Inquiry Sent!";
+          window.setTimeout(() => {
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+          }, 4000);
+        }
+      } catch {
+        showFormStatus(
+          "Your inquiry could not be sent. Please check your connection and try again.",
+          "error",
+        );
+
+        if (submitButton) {
+          submitButton.textContent = "Try Again";
           submitButton.disabled = false;
         }
-      }, 4000);
-    } catch (error) {
-      showFormStatus(
-        "Your inquiry could not be sent. Please check your connection and try again.",
-        "error",
-      );
-
-      if (submitButton) {
-        submitButton.textContent = "Try Again";
-        submitButton.disabled = false;
       }
-    }
-  });
-
-  function showFormStatus(message, type) {
-    const existingStatus = bookingForm.querySelector(".form-status");
-
-    if (existingStatus) {
-      existingStatus.remove();
-    }
-
-    const status = document.createElement("p");
-
-    status.className = `form-status ${type}`;
-    status.setAttribute("role", type === "error" ? "alert" : "status");
-    status.textContent = message;
-
-    bookingForm.appendChild(status);
-
-    status.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
     });
   }
-}
+})();
