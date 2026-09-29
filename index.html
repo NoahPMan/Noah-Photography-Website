@@ -62,31 +62,99 @@
     </header>
 
     <main id="main">
-      <!-- HERO -->
-      <section class="hero">
-        <div class="hero-grid">
-          <div class="hero-text">
-            <p class="hero-kicker">Photographer &mdash; Winnipeg, Manitoba</p>
-            <h1>Noah Manaigre</h1>
-            <p class="hero-lede">
-              I’m a Winnipeg-based photographer capturing sports, portraits,
-              street life, and wildlife. I focus on real moments, strong
-              composition, and images that feel natural rather than forced.
-            </p>
+      <!-- FEATURED HERO -->
+      <section
+        id="featuredWork"
+        class="showcase-hero"
+        aria-label="Featured photography"
+        aria-roledescription="carousel"
+      >
+        <div class="showcase-slides">
 
-            <div class="buttons">
-              <a href="#portfolio" class="btn">View Portfolio</a>
-              <a href="#booking" class="btn outline">Book a Session</a>
-            </div>
-          </div>
+          <article class="showcase-slide" data-label="Couples photography" aria-hidden="true">
+            <img class="showcase-backdrop" src="photos/DSC04983.jpg" alt="" aria-hidden="true" />
+            <img class="showcase-image" src="photos/DSC04983.jpg" alt="Featured couples photograph" loading="lazy" />
+          </article>
 
-          <div class="hero-image">
+          <article class="showcase-slide active" data-label="Portrait photography" aria-hidden="false">
+            <img class="showcase-backdrop" src="photos/DSC03516.jpg" alt="" aria-hidden="true" />
+            <img class="showcase-image" src="photos/DSC03516.jpg" alt="Featured portrait photograph" />
+          </article>
+
+          <article class="showcase-slide" data-label="Sports photography" aria-hidden="true">
+            <img class="showcase-backdrop" src="photos/DSC04402.jpg" alt="" aria-hidden="true" />
+            <img class="showcase-image" src="photos/DSC04402.jpg" alt="Featured sports photograph" loading="lazy" />
+          </article>
+
+          <article class="showcase-slide" data-label="Creative lifestyle photography" aria-hidden="true">
+            <img class="showcase-backdrop" src="photos/IMG_0527.jpg" alt="" aria-hidden="true" />
+            <img class="showcase-image" src="photos/IMG_0527.jpg" alt="People silhouetted near the beach" loading="lazy" />
+          </article>
+
+          <article class="showcase-slide" data-label="Fine-art landscape photography" aria-hidden="true">
+            <img class="showcase-backdrop" src="photos/AFE76896-931B-451A-A16E-D7BC14AD712E.jpg" alt="" aria-hidden="true" />
             <img
-              src="photos/IMG_2601-modded.JPEG"
-              alt="Noah Manaigre with a camera"
+              class="showcase-image"
+              src="photos/AFE76896-931B-451A-A16E-D7BC14AD712E.jpg"
+              alt="Lighthouse on rocky terrain beneath lightning-filled storm clouds"
+              loading="lazy"
             />
+          </article>
+        </div>
+
+        <div class="showcase-overlay" aria-hidden="true"></div>
+
+        <div class="showcase-content">
+          <p class="showcase-kicker">Winnipeg, Manitoba</p>
+          <p class="showcase-brand">Photography</p>
+          <h1>Noah Manaigre</h1>
+          <p class="showcase-lede">Portraits &middot; Couples &middot; Graduations &middot; Sports</p>
+
+          <div class="showcase-buttons">
+            <a href="#portfolio" class="btn showcase-primary">View Portfolio</a>
+            <a href="#booking" class="btn showcase-outline">Book a Session</a>
           </div>
         </div>
+
+        <button
+          id="showcasePrevious"
+          class="showcase-arrow showcase-previous"
+          type="button"
+          aria-label="Show previous photograph"
+        >
+          <span aria-hidden="true">&lsaquo;</span>
+        </button>
+
+        <button
+          id="showcaseNext"
+          class="showcase-arrow showcase-next"
+          type="button"
+          aria-label="Show next photograph"
+        >
+          <span aria-hidden="true">&rsaquo;</span>
+        </button>
+
+        <div class="showcase-controls">
+          <div class="showcase-dots" aria-label="Choose featured photograph">
+            <button class="showcase-dot active" type="button" data-slide="0" aria-label="Show portrait photograph" aria-current="true"></button>
+            <button class="showcase-dot" type="button" data-slide="1" aria-label="Show couples photograph"></button>
+            <button class="showcase-dot" type="button" data-slide="2" aria-label="Show sports photograph"></button>
+            <button class="showcase-dot" type="button" data-slide="3" aria-label="Show lifestyle photograph"></button>
+            <button class="showcase-dot" type="button" data-slide="4" aria-label="Show fine-art landscape photograph"></button>
+          </div>
+
+          <button
+            id="showcasePause"
+            class="showcase-pause"
+            type="button"
+            aria-label="Pause featured photographs"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">Pause</span>
+          </button>
+        </div>
+
+        <p id="showcaseStatus" class="sr-only" aria-live="polite">Portrait photography</p>
       </section>
 
       <!-- PORTFOLIO INDEX -->
@@ -150,7 +218,7 @@
         <div class="about-grid">
           <div class="about-image">
             <img
-              src="photos/IMG_0953.JPG"
+              src="photos\IMG_2601-modded.JPEG"
               alt="Noah Manaigre holding a camera"
               loading="lazy"
             />
