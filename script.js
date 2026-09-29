@@ -65,9 +65,7 @@
   const showcaseHero = document.getElementById("featuredWork");
 
   if (showcaseHero) {
-    const slides = Array.from(
-      showcaseHero.querySelectorAll(".showcase-slide"),
-    );
+    const slides = Array.from(showcaseHero.querySelectorAll(".showcase-slide"));
     const dots = Array.from(showcaseHero.querySelectorAll(".showcase-dot"));
     const previousButton = document.getElementById("showcasePrevious");
     const nextButton = document.getElementById("showcaseNext");
@@ -129,9 +127,7 @@
         pauseButton.setAttribute("aria-pressed", String(isPaused));
         pauseButton.setAttribute(
           "aria-label",
-          isPaused
-            ? "Play featured photographs"
-            : "Pause featured photographs",
+          isPaused ? "Play featured photographs" : "Pause featured photographs",
         );
 
         const label = pauseButton.querySelector("span");
@@ -146,7 +142,8 @@
           return;
         }
 
-        currentSlide = ((index % slides.length) + slides.length) % slides.length;
+        currentSlide =
+          ((index % slides.length) + slides.length) % slides.length;
 
         slides.forEach((slide, slideIndex) => {
           const isActive = slideIndex === currentSlide;
@@ -519,7 +516,9 @@
       const fieldContainer = field.closest(".field");
 
       if (!fieldContainer) {
-        console.error(`The booking field "${field.id}" has no field container.`);
+        console.error(
+          `The booking field "${field.id}" has no field container.`,
+        );
         return;
       }
 
@@ -700,7 +699,10 @@
         bookingForm.reset();
         Object.values(fields).forEach(removeError);
         updatePrintAvailability();
-        showFormStatus("Thanks! Your inquiry was sent successfully.", "success");
+        showFormStatus(
+          "Thanks! Your inquiry was sent successfully.",
+          "success",
+        );
 
         if (submitButton) {
           submitButton.textContent = "Inquiry Sent!";
