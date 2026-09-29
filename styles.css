@@ -2143,3 +2143,21 @@ p {
   font-size: 2rem;
   line-height: 1;
 }
+
+/* Soften the hero control bar */
+
+.showcase-slides,
+.showcase-overlay {
+  bottom: 0;
+}
+
+.showcase-slide {
+  padding-bottom: 68px;
+}
+
+.showcase-controls {
+  background: rgba(15, 14, 11, 0.52);
+  border-top-color: rgba(246, 244, 239, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
