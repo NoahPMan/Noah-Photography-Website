@@ -5,19 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png" />
-    <meta name="theme-color" content="#000000" />
+    <link
+      rel="canonical"
+      href="https://noahpman.github.io/Noah-Photography-Website/"
+    />
+    <meta name="theme-color" content="#f6f4ef" />
 
     <meta
       name="description"
-      content="Noah Manaigre is a photographer based in Winnipeg, Manitoba, specializing in sports, portrait, street, and nature photography."
+      content="Explore portraits, couples, graduation, sports, street, and wildlife photography by Noah Manaigre, a Winnipeg, Manitoba photographer. View packages and book a session."
     />
     <meta property="og:title" content="Noah Manaigre Photography" />
     <meta
       property="og:description"
-      content="Sports, portrait, street, and nature photography in Winnipeg, Manitoba."
+      content="Portraits, couples, graduation, sports, street, and wildlife photography in Winnipeg, Manitoba."
     />
-    <meta property="og:image" content="photos/IMG_2601-modded.JPEG" />
+    <meta
+      property="og:url"
+      content="https://noahpman.github.io/Noah-Photography-Website/"
+    />
+    <meta
+      property="og:image"
+      content="https://noahpman.github.io/Noah-Photography-Website/photos/IMG_2601-modded.JPEG"
+    />
+    <meta
+      property="og:image:alt"
+      content="Winnipeg photographer Noah Manaigre holding a camera"
+    />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content="Noah Manaigre Photography" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Noah Manaigre Photography" />
+    <meta
+      name="twitter:description"
+      content="Portraits, couples, graduation, sports, street, and wildlife photography in Winnipeg, Manitoba."
+    />
+    <meta
+      name="twitter:image"
+      content="https://noahpman.github.io/Noah-Photography-Website/photos/IMG_2601-modded.JPEG"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="Winnipeg photographer Noah Manaigre holding a camera"
+    />
 
     <title>Noah Manaigre — Photographer, Winnipeg</title>
 
@@ -27,7 +58,7 @@
       href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
@@ -40,8 +71,10 @@
         <button
           class="nav-toggle"
           id="navToggle"
+          type="button"
           aria-expanded="false"
           aria-controls="navMenu"
+          aria-label="Open navigation"
         >
           <span></span>
           <span></span>
@@ -66,38 +99,143 @@
       <section
         id="featuredWork"
         class="showcase-hero"
+        role="region"
         aria-label="Featured photography"
         aria-roledescription="carousel"
+        tabindex="0"
       >
         <div class="showcase-slides">
-
-          <article class="showcase-slide" data-label="Couples photography" aria-hidden="true">
-            <img class="showcase-backdrop" src="photos/DSC04983.jpg" alt="" aria-hidden="true" />
-            <img class="showcase-image" src="photos/DSC04983.jpg" alt="Featured couples photograph" loading="lazy" />
+          <article
+            class="showcase-slide active"
+            data-label="Couples photography"
+            aria-label="1 of 5: Couples photography"
+            aria-roledescription="slide"
+            aria-hidden="false"
+          >
+            <img
+              class="showcase-backdrop"
+              src="photos/DSC04983.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="showcase-image"
+              src="photos/DSC04983.jpg"
+              alt="Couple sharing a quiet moment in warm evening light"
+              width="4000"
+              height="6000"
+              fetchpriority="high"
+              decoding="async"
+            />
           </article>
 
-          <article class="showcase-slide active" data-label="Portrait photography" aria-hidden="false">
-            <img class="showcase-backdrop" src="photos/DSC03516.jpg" alt="" aria-hidden="true" />
-            <img class="showcase-image" src="photos/DSC03516.jpg" alt="Featured portrait photograph" />
+          <article
+            class="showcase-slide"
+            data-label="Portrait photography"
+            aria-label="2 of 5: Portrait photography"
+            aria-roledescription="slide"
+            aria-hidden="true"
+            inert
+          >
+            <img
+              class="showcase-backdrop"
+              src="photos/DSC03516.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="showcase-image"
+              src="photos/DSC03516.jpg"
+              alt="Portrait of a woman standing outdoors in winter"
+              width="3660"
+              height="5490"
+              loading="lazy"
+              decoding="async"
+            />
           </article>
 
-          <article class="showcase-slide" data-label="Sports photography" aria-hidden="true">
-            <img class="showcase-backdrop" src="photos/DSC04402.jpg" alt="" aria-hidden="true" />
-            <img class="showcase-image" src="photos/DSC04402.jpg" alt="Featured sports photograph" loading="lazy" />
+          <article
+            class="showcase-slide"
+            data-label="Sports photography"
+            aria-label="3 of 5: Sports photography"
+            aria-roledescription="slide"
+            aria-hidden="true"
+            inert
+          >
+            <img
+              class="showcase-backdrop"
+              src="photos/DSC04402.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="showcase-image"
+              src="photos/DSC04402.jpg"
+              alt="Hockey player in black and yellow holding a stick on the ice"
+              width="3588"
+              height="4484"
+              loading="lazy"
+              decoding="async"
+            />
           </article>
 
-          <article class="showcase-slide" data-label="Creative lifestyle photography" aria-hidden="true">
-            <img class="showcase-backdrop" src="photos/IMG_0527.jpg" alt="" aria-hidden="true" />
-            <img class="showcase-image" src="photos/IMG_0527.jpg" alt="People silhouetted near the beach" loading="lazy" />
+          <article
+            class="showcase-slide"
+            data-label="Lifestyle photography"
+            aria-label="4 of 5: Lifestyle photography"
+            aria-roledescription="slide"
+            aria-hidden="true"
+            inert
+          >
+            <img
+              class="showcase-backdrop"
+              src="photos/IMG_0527.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="showcase-image"
+              src="photos/IMG_0527.jpg"
+              alt="Silhouetted group canoeing at sunset"
+              width="2133"
+              height="2667"
+              loading="lazy"
+              decoding="async"
+            />
           </article>
 
-          <article class="showcase-slide" data-label="Fine-art landscape photography" aria-hidden="true">
-            <img class="showcase-backdrop" src="photos/AFE76896-931B-451A-A16E-D7BC14AD712E.jpg" alt="" aria-hidden="true" />
+          <article
+            class="showcase-slide"
+            data-label="Landscape photography"
+            aria-label="5 of 5: Landscape photography"
+            aria-roledescription="slide"
+            aria-hidden="true"
+            inert
+          >
+            <img
+              class="showcase-backdrop"
+              src="photos/AFE76896-931B-451A-A16E-D7BC14AD712E.jpg"
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
             <img
               class="showcase-image"
               src="photos/AFE76896-931B-451A-A16E-D7BC14AD712E.jpg"
-              alt="Lighthouse on rocky terrain beneath lightning-filled storm clouds"
+              alt="Lighthouse among rocks beneath a lightning-filled storm sky"
+              width="2448"
+              height="3264"
               loading="lazy"
+              decoding="async"
             />
           </article>
         </div>
@@ -116,31 +254,22 @@
           </div>
         </div>
 
-        <button
-          id="showcasePrevious"
-          class="showcase-arrow showcase-previous"
-          type="button"
-          aria-label="Show previous photograph"
-        >
-          <span aria-hidden="true">&lsaquo;</span>
-        </button>
+        <div class="showcase-controls" role="group" aria-label="Carousel controls">
+          <button
+            id="showcasePrevious"
+            class="showcase-arrow showcase-previous"
+            type="button"
+            aria-label="Show previous photograph"
+          >
+            <span aria-hidden="true">&lsaquo;</span>
+          </button>
 
-        <button
-          id="showcaseNext"
-          class="showcase-arrow showcase-next"
-          type="button"
-          aria-label="Show next photograph"
-        >
-          <span aria-hidden="true">&rsaquo;</span>
-        </button>
-
-        <div class="showcase-controls">
-          <div class="showcase-dots" aria-label="Choose featured photograph">
-            <button class="showcase-dot active" type="button" data-slide="0" aria-label="Show portrait photograph" aria-current="true"></button>
-            <button class="showcase-dot" type="button" data-slide="1" aria-label="Show couples photograph"></button>
+          <div class="showcase-dots" role="group" aria-label="Choose a featured photograph">
+            <button class="showcase-dot active" type="button" data-slide="0" aria-label="Show couples photograph" aria-current="true"></button>
+            <button class="showcase-dot" type="button" data-slide="1" aria-label="Show portrait photograph"></button>
             <button class="showcase-dot" type="button" data-slide="2" aria-label="Show sports photograph"></button>
             <button class="showcase-dot" type="button" data-slide="3" aria-label="Show lifestyle photograph"></button>
-            <button class="showcase-dot" type="button" data-slide="4" aria-label="Show fine-art landscape photograph"></button>
+            <button class="showcase-dot" type="button" data-slide="4" aria-label="Show landscape photograph"></button>
           </div>
 
           <button
@@ -152,9 +281,20 @@
           >
             <span aria-hidden="true">Pause</span>
           </button>
+
+          <button
+            id="showcaseNext"
+            class="showcase-arrow showcase-next"
+            type="button"
+            aria-label="Show next photograph"
+          >
+            <span aria-hidden="true">&rsaquo;</span>
+          </button>
         </div>
 
-        <p id="showcaseStatus" class="sr-only" aria-live="polite">Portrait photography</p>
+        <p id="showcaseStatus" class="sr-only" aria-live="polite" aria-atomic="true">
+          Couples photography
+        </p>
       </section>
 
       <!-- PORTFOLIO INDEX -->
@@ -218,9 +358,10 @@
         <div class="about-grid">
           <div class="about-image">
             <img
-              src="photos\IMG_2601-modded.JPEG"
+              src="photos/IMG_2601-modded.JPEG"
               alt="Noah Manaigre holding a camera"
               loading="lazy"
+              decoding="async"
             />
           </div>
 
@@ -272,7 +413,6 @@
             downloads, and delivery through a private online gallery.
           </p>
         </div>
-
         <div class="pricing-group">
           <p class="pricing-group-title">Portraits &amp; People</p>
 
@@ -358,7 +498,7 @@
             </li>
           </ul>
         </div>
-         
+
         <div class="pricing-group">
           <p class="pricing-group-title">Events</p>
 
@@ -382,34 +522,33 @@
           best fits your needs, feel free to reach out and we'll find the right
           option together.
         </p>
-<!-- Print Description -->
-<div class="print-addon">
-  <div class="print-addon-content">
-    <div>
-      <p class="pricing-group-title">Optional Add-On</p>
+        <div class="print-addon">
+          <div class="print-addon-content">
+            <div>
+              <p class="pricing-group-title">Optional Add-On</p>
 
-      <h3>Signature Print Collection</h3>
+              <h3>Signature Print Collection</h3>
 
-      <p class="print-addon-description">
-        Turn your favourite photographs into a curated collection of
-        professionally printed artwork.
-      </p>
+              <p class="print-addon-description">
+                Turn your favourite photographs into a curated collection of
+                professionally printed artwork.
+              </p>
 
-      <ul class="print-addon-list">
-        <li>1 statement print, up to 16 &times; 20 inches</li>
-        <li>2 display prints, up to 8 &times; 10 inches</li>
-        <li>4 keepsake prints, up to 5 &times; 7 inches</li>
-      </ul>
+              <ul class="print-addon-list">
+                <li>1 statement print, up to 16 &times; 20 inches</li>
+                <li>2 display prints, up to 8 &times; 10 inches</li>
+                <li>4 keepsake prints, up to 5 &times; 7 inches</li>
+              </ul>
 
-      <p class="print-addon-availability">
-        Final dimensions are selected to best suit each photograph.
-        Prints only. Frames are not included.
-      </p>
-    </div>
+              <p class="print-addon-availability">
+                Final dimensions are selected to best suit each photograph.
+                Prints only. Frames are not included.
+              </p>
+            </div>
 
-    <p class="print-addon-price">+$125</p>
-  </div>
-</div>
+            <p class="print-addon-price">+$125</p>
+          </div>
+        </div>
       </section>
 
       <!-- BOOKING -->
@@ -489,8 +628,8 @@
 
                 <option value="Graduation Session">Graduation Session</option>
 
-                <option value="Engagement & Couples Session">
-                  Engagement & Couples Session
+                <option value="Engagement &amp; Couples Session">
+                  Engagement &amp; Couples Session
                 </option>
 
                 <option value="Family Session">Family Session</option>
