@@ -644,15 +644,51 @@ p {
 }
 
 .about-facts dt {
-    margin-bottom: 4px;
-    color: var(--grey);
-    font-size: 0.8rem;
+    margin-bottom: 7px;
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
 }
 
 .about-facts dd {
     margin: 0;
     color: var(--ink);
     font-size: 0.98rem;
+    line-height: 1.6;
+}
+
+.about-education {
+    grid-column: 1 / -1;
+}
+
+.education-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.education-list li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+    align-items: baseline;
+    gap: 12px;
+    min-width: 0;
+    padding: 10px 0;
+    border-top: 1px solid var(--hairline);
+}
+
+.education-list strong {
+    color: var(--ink);
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.education-list span {
+    color: var(--ink-soft);
+    line-height: 1.55;
 }
 
 .about-link {
@@ -1217,6 +1253,11 @@ p {
 
     .about-facts {
         grid-template-columns: 1fr;
+    }
+
+    .education-list li {
+        grid-template-columns: 1fr;
+        gap: 2px;
     }
 
     .portfolio-grid {
