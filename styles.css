@@ -1491,6 +1491,10 @@ p {
     font-size: 0.95rem;
 }
 
+.pricing-note h3+p {
+    margin-top: 12px;
+}
+
 @media (max-width: 700px) {
     .pricing-group+.pricing-group {
         margin-top: 48px;
@@ -2140,4 +2144,8 @@ p {
     .showcase-slide {
         transition: none;
     }
+}
+
+.section-note p+p {
+    margin-top: 1rem;
 }
